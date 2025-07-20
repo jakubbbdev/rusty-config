@@ -1,7 +1,6 @@
 use crate::{ConfigError, ConfigResult};
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 /// Trait for validatable configurations
 #[async_trait]
@@ -181,7 +180,7 @@ impl TypeValidator {
 
     /// Validate that a port is in the valid range
     pub fn port(value: u16, field_name: &str) -> ConfigResult<()> {
-        if value == 0 || value > 65535 {
+        if value == 0 {
             return Err(ConfigError::Validation(format!(
                 "Field '{}' must be a valid port between 1 and 65535 (currently: {})",
                 field_name, value
