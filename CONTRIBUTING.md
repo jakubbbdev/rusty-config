@@ -1,306 +1,330 @@
 # 🤝 Contributing to RustyConfig
 
-Vielen Dank für dein Interesse an RustyConfig! Wir freuen uns über alle Beiträge, die das Projekt verbessern.
+Thank you for your interest in RustyConfig! We welcome all contributions that improve the project.
 
-## 📋 Inhaltsverzeichnis
+## 📋 Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
-- [Wie kann ich beitragen?](#wie-kann-ich-beitragen)
-- [Entwicklungsumgebung einrichten](#entwicklungsumgebung-einrichten)
-- [Pull Request Prozess](#pull-request-prozess)
+- [How can I contribute?](#how-can-i-contribute)
+- [Development Environment Setup](#development-environment-setup)
+- [Pull Request Process](#pull-request-process)
 - [Coding Standards](#coding-standards)
 - [Tests](#tests)
-- [Dokumentation](#dokumentation)
-- [Release Prozess](#release-prozess)
+- [Documentation](#documentation)
+- [Release Process](#release-process)
 
 ## 📜 Code of Conduct
 
-Dieses Projekt folgt dem [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). Durch die Teilnahme erwartet man, dass dieser Code eingehalten wird.
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
-## 🚀 Wie kann ich beitragen?
+## 🚀 How can I contribute?
 
-### Arten von Beiträgen
+### Types of Contributions
 
-- 🐛 **Bug Reports**: Melde Fehler und Probleme
-- ✨ **Feature Requests**: Schlage neue Features vor
-- 🔧 **Code Contributions**: Implementiere Features oder Fixes
-- 📚 **Documentation**: Verbessere die Dokumentation
-- 🧪 **Tests**: Erweitere die Testabdeckung
-- 🌍 **Translations**: Übersetze Dokumentation
+- 🐛 **Bug Reports**: Report bugs and issues
+- ✨ **Feature Requests**: Suggest new features
+- 🔧 **Code Contributions**: Implement features or fixes
+- 📚 **Documentation**: Improve documentation
+- 🧪 **Tests**: Extend test coverage
+- 🌍 **Translations**: Translate documentation
 
-### Erste Schritte
+### Getting Started
 
-1. Schaue dir die [Issues](https://github.com/yourusername/rusty-config/issues) an
-2. Suche nach Issues mit dem Label "good first issue" oder "help wanted"
-3. Kommentiere auf einem Issue, dass du daran arbeiten möchtest
-4. Forke das Repository und erstelle einen Feature-Branch
+1. Check out the [Issues](https://github.com/jakubbbdev/rusty-config/issues)
+2. Look for issues labeled "good first issue" or "help wanted"
+3. Comment on an issue that you'd like to work on
+4. Fork the repository and create a feature branch
 
-## 🛠️ Entwicklungsumgebung einrichten
+## 🛠️ Development Environment Setup
 
-### Voraussetzungen
+### Prerequisites
 
-- Rust 1.70 oder höher
+- Rust 1.70 or higher
 - Cargo
 - Git
 
 ### Setup
 
 ```bash
-# Repository klonen
-git clone https://github.com/yourusername/rusty-config.git
+# Clone repository
+git clone https://github.com/jakubbbdev/rusty-config.git
 cd rusty-config
 
-# Dependencies installieren
+# Install dependencies
 cargo build
 
-# Tests ausführen
+# Run tests
 cargo test
 
 # Linting
 cargo clippy
 
-# Formatierung
+# Formatting
 cargo fmt
 ```
 
-### Nützliche Tools
+### Useful Tools
 
 ```bash
-# Rustup Komponenten installieren
+# Install Rustup components
 rustup component add rustfmt
 rustup component add clippy
 rustup component add rust-docs
 
-# Cargo Tools installieren
+# Install Cargo tools
 cargo install cargo-audit
-cargo install cargo-tarpaulin  # für Code Coverage
-cargo install cargo-watch       # für automatisches Neustarten
+cargo install cargo-tarpaulin  # for code coverage
+cargo install cargo-watch       # for auto-restart
 ```
 
-## 🔄 Pull Request Prozess
+## 🔄 Pull Request Process
 
-### 1. Branch erstellen
+### 1. Create Branch
 
 ```bash
 git checkout -b feature/amazing-feature
-# oder
+# or
 git checkout -b fix/bug-description
 ```
 
-### 2. Änderungen entwickeln
+### 2. Develop Changes
 
-- Schreibe sauberen, dokumentierten Code
-- Füge Tests für neue Features hinzu
-- Stelle sicher, dass alle Tests bestehen
-- Aktualisiere die Dokumentation
+- Write clean, documented code
+- Add tests for new features
+- Ensure all tests pass
+- Update documentation
 
-### 3. Commits erstellen
+### 3. Create Commits
 
 ```bash
-# Änderungen stagen
+# Stage changes
 git add .
 
-# Commit mit aussagekräftiger Nachricht
-git commit -m "feat: add new validation rule for email addresses
+# Create commit with descriptive message
+git commit -m "feat: add amazing new feature"
 
-- Add TypeValidator::email method
-- Add tests for email validation
-- Update documentation with examples"
-```
-
-### 4. Push und Pull Request
-
-```bash
+# Push to your fork
 git push origin feature/amazing-feature
 ```
 
-Erstelle dann einen Pull Request auf GitHub mit:
+### 4. Submit Pull Request
 
-- **Titel**: Kurze Beschreibung der Änderung
-- **Beschreibung**: Detaillierte Erklärung der Änderungen
-- **Checklist**: Alle relevanten Punkte abhaken
+- Go to [GitHub](https://github.com/jakubbbdev/rusty-config)
+- Click "New Pull Request"
+- Select your branch
+- Fill out the PR template
+- Submit for review
 
-### 5. Pull Request Template
+## 📝 Coding Standards
 
-```markdown
-## 📝 Beschreibung
+### Rust Style Guide
 
-Kurze Beschreibung der Änderungen.
+- Follow [Rust Style Guide](https://doc.rust-lang.org/1.0.0/style/style/naming/README.html)
+- Use `cargo fmt` for formatting
+- Use `cargo clippy` for linting
+- Maximum line length: 100 characters
 
-## 🔗 Related Issues
-
-Fixes #123
-Closes #456
-
-## 🧪 Tests
-
-- [ ] Unit Tests hinzugefügt/aktualisiert
-- [ ] Integration Tests hinzugefügt/aktualisiert
-- [ ] Alle Tests bestehen
-
-## 📚 Dokumentation
-
-- [ ] Code-Kommentare hinzugefügt/aktualisiert
-- [ ] README aktualisiert
-- [ ] API-Dokumentation aktualisiert
-
-## ✅ Checklist
-
-- [ ] Code folgt den Coding Standards
-- [ ] Tests hinzugefügt und bestehen
-- [ ] Dokumentation aktualisiert
-- [ ] Keine Breaking Changes (oder dokumentiert)
-- [ ] Commit-Nachrichten folgen Conventional Commits
-```
-
-## 📏 Coding Standards
-
-### Rust Code Style
-
-- Verwende `rustfmt` für Formatierung
-- Folge den `clippy` Warnungen
-- Verwende aussagekräftige Variablen- und Funktionsnamen
-- Schreibe Dokumentation für öffentliche APIs
-
-### Code-Beispiel
+### Code Documentation
 
 ```rust
-/// Validiert eine E-Mail-Adresse.
+/// Brief description of the function
 ///
 /// # Arguments
-///
-/// * `email` - Die zu validierende E-Mail-Adresse
-/// * `field_name` - Der Name des Feldes für Fehlermeldungen
+/// * `param` - Description of parameter
 ///
 /// # Returns
-///
-/// `ConfigResult<()>` - Ok(()) wenn gültig, Fehler wenn ungültig
+/// Description of return value
 ///
 /// # Examples
-///
 /// ```
-/// use rusty_config::validator::TypeValidator;
-///
-/// let result = TypeValidator::email("test@example.com", "email");
-/// assert!(result.is_ok());
+/// use rusty_config::some_function;
+/// let result = some_function("example");
 /// ```
-pub fn email(email: &str, field_name: &str) -> ConfigResult<()> {
-    if !email.contains('@') || !email.contains('.') {
-        return Err(ConfigError::Validation(format!(
-            "Feld '{}' muss eine gültige E-Mail-Adresse sein",
-            field_name
-        )));
-    }
-    Ok(())
+pub fn some_function(param: &str) -> Result<String, Error> {
+    // Implementation
 }
 ```
 
-### Commit-Nachrichten
+### Error Handling
 
-Verwende [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat: add new validation rule for email addresses
-fix: resolve issue with hot-reload on Windows
-docs: update README with new examples
-test: add comprehensive tests for TypeValidator
-refactor: improve error handling in ConfigBuilder
-```
+- Use `Result<T, E>` for fallible operations
+- Provide meaningful error messages
+- Use `thiserror` for custom error types
+- Handle errors gracefully
 
 ## 🧪 Tests
 
-### Test-Struktur
+### Test Structure
 
 ```rust
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    #[tokio::test]
-    async fn test_valid_email() {
-        let result = TypeValidator::email("test@example.com", "email");
-        assert!(result.is_ok());
+    #[test]
+    fn test_function_name() {
+        // Arrange
+        let input = "test";
+        
+        // Act
+        let result = function(input);
+        
+        // Assert
+        assert_eq!(result, expected);
     }
 
     #[tokio::test]
-    async fn test_invalid_email() {
-        let result = TypeValidator::email("invalid-email", "email");
-        assert!(result.is_err());
+    async fn test_async_function() {
+        // Async test implementation
     }
 }
 ```
 
-### Test-Ausführung
+### Test Guidelines
+
+- Write unit tests for all public functions
+- Use descriptive test names
+- Follow AAA pattern (Arrange, Act, Assert)
+- Test both success and failure cases
+- Use `#[should_panic]` for panic tests
+- Use `#[ignore]` for slow tests
+
+### Running Tests
 
 ```bash
-# Alle Tests
+# Run all tests
 cargo test
 
-# Spezifische Tests
-cargo test test_valid_email
-
-# Tests mit Output
+# Run tests with output
 cargo test -- --nocapture
 
-# Code Coverage
+# Run specific test
+cargo test test_name
+
+# Run ignored tests
+cargo test -- --ignored
+
+# Run tests with coverage
 cargo tarpaulin
 ```
 
-## 📚 Dokumentation
+## 📚 Documentation
 
-### Code-Dokumentation
+### Code Documentation
 
-- Dokumentiere alle öffentlichen APIs
-- Verwende Beispiele in der Dokumentation
-- Halte die Dokumentation aktuell
+- Document all public APIs
+- Use doc comments (`///`)
+- Include examples in documentation
+- Keep documentation up to date
 
 ### README Updates
 
-- Aktualisiere die README bei neuen Features
-- Füge Beispiele hinzu
-- Aktualisiere die Installation-Anweisungen
+- Update README.md for new features
+- Add examples for new functionality
+- Update installation instructions
+- Keep feature list current
 
-## 🚀 Release Prozess
+### API Documentation
 
-### Versionierung
+```bash
+# Generate documentation
+cargo doc
 
-Wir verwenden [Semantic Versioning](https://semver.org/):
+# Open documentation in browser
+cargo doc --open
 
-- **MAJOR**: Breaking Changes
-- **MINOR**: Neue Features (rückwärtskompatibel)
-- **PATCH**: Bug Fixes (rückwärtskompatibel)
+# Generate documentation for all features
+cargo doc --all-features
+```
 
-### Release Checklist
+## 🚀 Release Process
 
-- [ ] Alle Tests bestehen
-- [ ] Dokumentation ist aktuell
-- [ ] CHANGELOG ist aktualisiert
-- [ ] Version in Cargo.toml ist erhöht
-- [ ] Release Notes sind geschrieben
+### Version Bumping
 
-## 🆘 Hilfe
+- Follow [Semantic Versioning](https://semver.org/)
+- Update version in `Cargo.toml`
+- Update `CHANGELOG.md`
+- Create release notes
 
-### Wo bekomme ich Hilfe?
+### Pre-release Checklist
 
-- [Issues](https://github.com/yourusername/rusty-config/issues) - Für Bug Reports und Feature Requests
-- [Discussions](https://github.com/yourusername/rusty-config/discussions) - Für Fragen und Diskussionen
-- [Documentation](https://docs.rs/rusty-config) - API-Dokumentation
+- [ ] All tests pass
+- [ ] Documentation is updated
+- [ ] CHANGELOG.md is updated
+- [ ] Version is bumped
+- [ ] Code is formatted
+- [ ] Linting passes
+- [ ] Security audit passes
 
-### Häufige Fragen
+### Release Steps
 
-**Q: Wie kann ich ein neues Feature vorschlagen?**
-A: Erstelle ein Issue mit dem Label "enhancement" und beschreibe das Feature detailliert.
+1. Create release branch
+2. Update version numbers
+3. Update CHANGELOG.md
+4. Create pull request
+5. Get review and approval
+6. Merge to main
+7. Create GitHub release
+8. Publish to crates.io
 
-**Q: Wie kann ich einen Bug melden?**
-A: Erstelle ein Issue mit dem Label "bug" und füge alle relevanten Informationen hinzu.
+## 🎯 Issue Templates
 
-**Q: Wie kann ich bei der Dokumentation helfen?**
-A: Forke das Repository und erstelle Pull Requests für Dokumentationsverbesserungen.
+### Bug Report Template
 
-## 🙏 Danksagung
+```markdown
+## Bug Description
+Brief description of the bug
 
-Vielen Dank für deine Beiträge zu RustyConfig! Jeder Beitrag, egal wie klein, hilft dabei, das Projekt zu verbessern.
+## Steps to Reproduce
+1. Step 1
+2. Step 2
+3. Step 3
 
----
+## Expected Behavior
+What should happen
 
-**Entwickelt mit ❤️ von der Rust-Community** 
+## Actual Behavior
+What actually happens
+
+## Environment
+- OS: [e.g., Windows 10, macOS 12.0]
+- Rust Version: [e.g., 1.70.0]
+- Crate Version: [e.g., 0.1.0]
+
+## Additional Information
+Any other relevant information
+```
+
+### Feature Request Template
+
+```markdown
+## Feature Description
+Brief description of the feature
+
+## Use Case
+Why is this feature needed?
+
+## Proposed Solution
+How should this feature work?
+
+## Alternatives Considered
+Other approaches that were considered
+
+## Additional Information
+Any other relevant information
+```
+
+## 📞 Getting Help
+
+- Create an [Issue](https://github.com/jakubbbdev/rusty-config/issues)
+- Join our [Discussions](https://github.com/jakubbbdev/rusty-config/discussions)
+- Check the [Documentation](https://docs.rs/rusty-config)
+
+## 🙏 Recognition
+
+Contributors will be recognized in:
+- README.md contributors section
+- Release notes
+- GitHub contributors page
+
+Thank you for contributing to RustyConfig! 🦀 

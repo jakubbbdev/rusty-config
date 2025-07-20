@@ -295,7 +295,7 @@ Contributions are welcome! Please read the [Contributing Guidelines](CONTRIBUTIN
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/rusty-config.git
+git clone https://github.com/jakubbbdev/rusty-config.git
 cd rusty-config
 
 # Run tests
