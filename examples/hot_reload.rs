@@ -44,7 +44,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("✅ Hot-Reload-Konfiguration gestartet!");
     println!("📁 Überwachte Datei: hot_reload_config.json");
-    println!("🔄 Version: {}", config.version());
+    println!("🔄 Version: {version}", version = config.version());
     println!();
 
     // Starte einen Watcher für Konfigurationsänderungen
@@ -53,11 +53,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Zeige initiale Konfiguration
     let initial_config = config.get();
     println!("📊 Initiale Konfiguration:");
-    println!("   Nachricht: {}", initial_config.message);
-    println!("   Zähler: {}", initial_config.counter);
-    println!("   Aktiviert: {}", initial_config.settings.enabled);
-    println!("   Intervall: {}ms", initial_config.settings.interval);
-    println!("   Timeout: {}ms", initial_config.settings.timeout);
+    println!("   Nachricht: {message}", message = initial_config.message);
+    println!("   Zähler: {counter}", counter = initial_config.counter);
+    println!("   Aktiviert: {enabled}", enabled = initial_config.settings.enabled);
+    println!("   Intervall: {interval}ms", interval = initial_config.settings.interval);
+    println!("   Timeout: {timeout}ms", timeout = initial_config.settings.timeout);
     println!();
 
     println!("👀 Warte auf Konfigurationsänderungen...");
@@ -74,14 +74,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             Ok(new_config) = change_stream.recv() => {
                 let current_version = config.version();
                 if current_version > last_version {
-                    println!("🔄 Konfiguration wurde aktualisiert! (v{} -> v{})",
-                        last_version, current_version);
+                    println!("🔄 Konfiguration wurde aktualisiert! (v{last} -> v{current})",
+                        last = last_version, current = current_version);
                     println!("📊 Neue Konfiguration:");
-                    println!("   Nachricht: {}", new_config.message);
-                    println!("   Zähler: {}", new_config.counter);
-                    println!("   Aktiviert: {}", new_config.settings.enabled);
-                    println!("   Intervall: {}ms", new_config.settings.interval);
-                    println!("   Timeout: {}ms", new_config.settings.timeout);
+                    println!("   Nachricht: {message}", message = new_config.message);
+                    println!("   Zähler: {counter}", counter = new_config.counter);
+                    println!("   Aktiviert: {enabled}", enabled = new_config.settings.enabled);
+                    println!("   Intervall: {interval}ms", interval = new_config.settings.interval);
+                    println!("   Timeout: {timeout}ms", timeout = new_config.settings.timeout);
                     println!();
 
                     last_version = current_version;
@@ -91,9 +91,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             // Simuliere periodische Überprüfung
             _ = sleep(Duration::from_secs(5)) => {
                 let current_config = config.get();
-                println!("⏰ Status-Check (v{}):", config.version());
-                println!("   Nachricht: {}", current_config.message);
-                println!("   Zähler: {}", current_config.counter);
+                println!("⏰ Status-Check (v{version}):", version = config.version());
+                println!("   Nachricht: {message}", message = current_config.message);
+                println!("   Zähler: {counter}", counter = current_config.counter);
                 println!();
             }
         }

@@ -109,7 +109,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     println!("✅ Gültige Konfiguration erfolgreich validiert!");
-    println!("📊 Konfiguration: {:?}", valid_config.get());
+    println!("📊 Konfiguration: {config:?}", config = valid_config.get());
     println!();
 
     // Test 2: Ungültige Konfiguration (Port 0)
@@ -148,7 +148,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match invalid_config_result {
         Ok(_) => println!("❌ Erwarteter Fehler trat nicht auf!"),
-        Err(e) => println!("✅ Erwarteter Validierungsfehler: {}", e),
+        Err(e) => println!("✅ Erwarteter Validierungsfehler: {error}", error = e),
     }
     println!();
 
@@ -188,7 +188,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match invalid_config_result2 {
         Ok(_) => println!("❌ Erwarteter Fehler trat nicht auf!"),
-        Err(e) => println!("✅ Erwarteter Validierungsfehler: {}", e),
+        Err(e) => println!("✅ Erwarteter Validierungsfehler: {error}", error = e),
     }
     println!();
 
@@ -228,7 +228,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match invalid_config_result3 {
         Ok(_) => println!("❌ Erwarteter Fehler trat nicht auf!"),
-        Err(e) => println!("✅ Erwarteter Validierungsfehler: {}", e),
+        Err(e) => println!("✅ Erwarteter Validierungsfehler: {error}", error = e),
     }
     println!();
 
@@ -267,7 +267,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match config.validate().await {
         Ok(_) => println!("✅ Manuelle Validierung erfolgreich!"),
-        Err(e) => println!("❌ Validierungsfehler: {}", e),
+        Err(e) => println!("❌ Validierungsfehler: {error}", error = e),
     }
     println!();
 

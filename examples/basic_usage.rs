@@ -64,7 +64,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("✅ Config loaded successfully!");
     println!("📁 File: config.json");
-    println!("🔄 Version: {}", config.version());
+    println!("🔄 Version: {version}", version = config.version());
     println!();
 
     // Show config data
@@ -97,8 +97,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .await?;
 
     println!("💾 Config saved to 'config_updated.json'!");
-    println!("   New port: {}", updated_config.server.port);
-    println!("   New log level: {}", updated_config.logging.level);
+    println!("   New port: {port}", port = updated_config.server.port);
+    println!("   New log level: {level}", level = updated_config.logging.level);
     println!();
 
     // Show supported formats
