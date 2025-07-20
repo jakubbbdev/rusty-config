@@ -58,9 +58,10 @@ impl ConfigBuilder {
     where
         T: Clone + DeserializeOwned + Serialize + Send + Sync + 'static,
     {
-        let file_path = self.file_path.clone().ok_or_else(|| {
-            ConfigError::InvalidPath("No file path specified".to_string())
-        })?;
+        let file_path = self
+            .file_path
+            .clone()
+            .ok_or_else(|| ConfigError::InvalidPath("No file path specified".to_string()))?;
 
         // Create file if desired and not present
         if self.create_if_missing && !file_path.exists() {
@@ -69,7 +70,7 @@ impl ConfigBuilder {
             } else {
                 // Create empty default config
                 let default_config = serde_json::to_string_pretty(&serde_json::Value::Object(
-                    serde_json::Map::new()
+                    serde_json::Map::new(),
                 ))?;
                 tokio::fs::write(&file_path, default_config).await?;
             }
@@ -112,7 +113,8 @@ impl ConfigBuilder {
     /// Create a config for a web app
     pub fn web_app() -> Self {
         Self::new()
-            .default_content(r#"{
+            .default_content(
+                r#"{
   "server": {
     "host": "localhost",
     "port": 8080,
@@ -126,7 +128,9 @@ impl ConfigBuilder {
     "level": "info",
     "file": "app.log"
   }
-}"#.to_string())
+}"#
+                .to_string(),
+            )
             .create_if_missing(true)
             .validate_on_load(true)
     }
@@ -134,7 +138,8 @@ impl ConfigBuilder {
     /// Create a config for a CLI app
     pub fn cli_app() -> Self {
         Self::new()
-            .default_content(r#"{
+            .default_content(
+                r#"{
   "output": {
     "format": "json",
     "pretty": true
@@ -145,14 +150,17 @@ impl ConfigBuilder {
   "logging": {
     "level": "warn"
   }
-}"#.to_string())
+}"#
+                .to_string(),
+            )
             .create_if_missing(true)
     }
 
     /// Create a config for a microservice
     pub fn microservice() -> Self {
         Self::new()
-            .default_content(r#"{
+            .default_content(
+                r#"{
   "service": {
     "name": "my-service",
     "version": "1.0.0"
@@ -165,8 +173,10 @@ impl ConfigBuilder {
     "endpoint": "/health",
     "interval": 30
   }
-}"#.to_string())
+}"#
+                .to_string(),
+            )
             .create_if_missing(true)
             .hot_reload(true)
     }
-} 
+}

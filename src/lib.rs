@@ -47,20 +47,20 @@
 //! }
 //! ```
 
-pub mod config;
 pub mod builder;
+pub mod config;
 pub mod error;
 pub mod loader;
 pub mod validator;
 pub mod watcher;
 
-pub use config::Config;
 pub use builder::ConfigBuilder;
+pub use config::Config;
 pub use error::{ConfigError, ConfigResult};
 
 /// Re-export commonly used types
 pub mod prelude {
     pub use crate::{Config, ConfigBuilder, ConfigError, ConfigResult};
-    pub use serde::{Deserialize, Serialize};
     pub use async_trait::async_trait;
-} 
+    pub use serde::{Deserialize, Serialize};
+}

@@ -1,4 +1,7 @@
-use rusty_config::{Config, ConfigBuilder, validator::{Validatable, TypeValidator, CommonValidators}};
+use rusty_config::{
+    validator::{CommonValidators, TypeValidator, Validatable},
+    Config, ConfigBuilder,
+};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -76,7 +79,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let valid_config = ConfigBuilder::new()
         .file("valid_config.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "localhost",
     "port": 8080,
@@ -97,7 +101,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "api_key": "sk-1234567890abcdef1234567890abcdef",
     "rate_limit": 1000
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .validate_on_load(true)
         .build::<ValidatedConfig>()
         .await?;
@@ -111,7 +117,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let invalid_config_result = ConfigBuilder::new()
         .file("invalid_config.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "localhost",
     "port": 0,
@@ -132,7 +139,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "api_key": "sk-1234567890abcdef1234567890abcdef",
     "rate_limit": 1000
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .validate_on_load(true)
         .build::<ValidatedConfig>()
         .await;
@@ -148,7 +157,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let invalid_config_result2 = ConfigBuilder::new()
         .file("invalid_config2.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "",
     "port": 8080,
@@ -169,7 +179,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "api_key": "sk-1234567890abcdef1234567890abcdef",
     "rate_limit": 1000
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .validate_on_load(true)
         .build::<ValidatedConfig>()
         .await;
@@ -185,7 +197,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let invalid_config_result3 = ConfigBuilder::new()
         .file("invalid_config3.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "localhost",
     "port": 8080,
@@ -206,7 +219,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "api_key": "sk-1234567890abcdef1234567890abcdef",
     "rate_limit": 1000
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .validate_on_load(true)
         .build::<ValidatedConfig>()
         .await;
@@ -222,7 +237,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = ConfigBuilder::new()
         .file("manual_validation_config.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "localhost",
     "port": 8080,
@@ -243,7 +259,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "api_key": "sk-1234567890abcdef1234567890abcdef",
     "rate_limit": 1000
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .build::<ValidatedConfig>()
         .await?;
 
@@ -269,4 +287,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("   • API-Rate-Limit muss zwischen 1-10000 liegen");
 
     Ok(())
-} 
+}

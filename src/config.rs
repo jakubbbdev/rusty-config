@@ -26,7 +26,7 @@ where
         let path = path.into();
         let data = crate::loader::load_from_file(&path).await?;
         let (reload_tx, reload_rx) = broadcast::channel(100);
-        
+
         let config = Self {
             inner: Arc::new(RwLock::new(crate::watcher::ConfigData {
                 data,
@@ -64,7 +64,7 @@ where
     /// Reload the config from file
     pub async fn reload(&mut self) -> ConfigResult<()> {
         let new_data = crate::loader::load_from_file(&self.file_path).await?;
-        
+
         {
             let mut inner = self.inner.write().unwrap();
             inner.data = new_data;
@@ -120,7 +120,7 @@ where
     }
 
     /// Validate the current config
-    pub async fn validate(&self) -> ConfigResult<()> 
+    pub async fn validate(&self) -> ConfigResult<()>
     where
         T: crate::validator::Validatable,
     {
@@ -156,4 +156,4 @@ where
             .field("watcher_id", &self.watcher_id)
             .finish()
     }
-} 
+}

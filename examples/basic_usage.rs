@@ -39,7 +39,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = ConfigBuilder::new()
         .file("config.json")
         .create_if_missing(true)
-        .default_content(r#"{
+        .default_content(
+            r#"{
   "server": {
     "host": "localhost",
     "port": 8080,
@@ -55,7 +56,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     "file": "app.log",
     "max_size": 10485760
   }
-}"#.to_string())
+}"#
+            .to_string(),
+        )
         .build::<AppConfig>()
         .await?;
 
@@ -67,20 +70,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Show config data
     let app_config = config.get();
     println!("📊 Config data:");
-    println!("   Server: {}:{} ({} workers)", 
-        app_config.server.host, 
-        app_config.server.port, 
-        app_config.server.workers
+    println!(
+        "   Server: {}:{} ({} workers)",
+        app_config.server.host, app_config.server.port, app_config.server.workers
     );
-    println!("   Database: {} (Pool: {}, Timeout: {}s)", 
-        app_config.database.url, 
-        app_config.database.pool_size, 
-        app_config.database.timeout
+    println!(
+        "   Database: {} (Pool: {}, Timeout: {}s)",
+        app_config.database.url, app_config.database.pool_size, app_config.database.timeout
     );
-    println!("   Logging: {} -> {} (Max: {} bytes)", 
-        app_config.logging.level, 
-        app_config.logging.file, 
-        app_config.logging.max_size
+    println!(
+        "   Logging: {} -> {} (Max: {} bytes)",
+        app_config.logging.level, app_config.logging.file, app_config.logging.max_size
     );
     println!();
 
@@ -92,8 +92,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Save the changes directly
     fs::write(
         "config_updated.json",
-        serde_json::to_string_pretty(&updated_config)?
-    ).await?;
+        serde_json::to_string_pretty(&updated_config)?,
+    )
+    .await?;
 
     println!("💾 Config saved to 'config_updated.json'!");
     println!("   New port: {}", updated_config.server.port);
@@ -109,4 +110,4 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("✨ Example finished successfully!");
     Ok(())
-} 
+}

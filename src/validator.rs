@@ -289,4 +289,4 @@ mod tests {
         assert!(TypeValidator::port(8080, "field").is_ok());
         assert!(TypeValidator::port(0, "field").is_err());
     }
-} 
+}

@@ -80,7 +80,9 @@ pub async fn start_watcher<T>(
 where
     T: Clone + DeserializeOwned + Serialize + Send + Sync + 'static,
 {
-    Err(ConfigError::HotReload("Hot-reload feature is not enabled".to_string()))
+    Err(ConfigError::HotReload(
+        "Hot-reload feature is not enabled".to_string(),
+    ))
 }
 
 /// Check if a file change should trigger a reload
@@ -169,7 +171,9 @@ impl ConfigWatcherManager {
 
         #[cfg(not(feature = "hot-reload"))]
         {
-            Err(ConfigError::HotReload("Hot-reload feature is not enabled".to_string()))
+            Err(ConfigError::HotReload(
+                "Hot-reload feature is not enabled".to_string(),
+            ))
         }
     }
 
@@ -236,7 +240,7 @@ pub mod utils {
     /// Wait for a file to become available
     pub async fn wait_for_file(path: &PathBuf, timeout: Duration) -> ConfigResult<()> {
         let start = std::time::Instant::now();
-        
+
         while start.elapsed() < timeout {
             if is_file_readable(path).await {
                 return Ok(());
@@ -318,4 +322,4 @@ mod tests {
         let modified_time = utils::get_file_modified_time(&path).await.unwrap();
         assert!(modified_time > std::time::SystemTime::UNIX_EPOCH);
     }
-} 
+}

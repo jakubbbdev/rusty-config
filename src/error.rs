@@ -68,4 +68,4 @@ impl From<notify::Error> for ConfigError {
     fn from(err: notify::Error) -> Self {
         ConfigError::HotReload(err.to_string())
     }
-} 
+}

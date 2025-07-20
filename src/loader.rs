@@ -8,7 +8,9 @@ where
     T: DeserializeOwned,
 {
     if !path.exists() {
-        return Err(ConfigError::FileNotFound(path.to_string_lossy().to_string()));
+        return Err(ConfigError::FileNotFound(
+            path.to_string_lossy().to_string(),
+        ));
     }
 
     let content = tokio::fs::read_to_string(path).await?;
@@ -36,7 +38,7 @@ where
 }
 
 /// Save a config to a file
-pub async fn save_to_file<T>(path: &Path, data: &T) -> ConfigResult<()> 
+pub async fn save_to_file<T>(path: &Path, data: &T) -> ConfigResult<()>
 where
     T: Serialize,
 {
@@ -303,4 +305,4 @@ mod tests {
             Some(ConfigFormat::Unknown)
         );
     }
-} 
+}
