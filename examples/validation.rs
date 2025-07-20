@@ -1,5 +1,6 @@
 use rusty_config::{
-    validator::{CommonValidators, TypeValidator, Validatable}, ConfigBuilder,
+    validator::{CommonValidators, TypeValidator, Validatable},
+    ConfigBuilder,
 };
 use serde::{Deserialize, Serialize};
 

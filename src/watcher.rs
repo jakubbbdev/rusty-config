@@ -164,7 +164,9 @@ impl ConfigWatcherManager {
         #[cfg(feature = "hot-reload")]
         {
             let handle = tokio::spawn(async move {
-                if let Err(e) = start_watcher(_file_path, _watcher_id, _config_data, _reload_tx).await {
+                if let Err(e) =
+                    start_watcher(_file_path, _watcher_id, _config_data, _reload_tx).await
+                {
                     eprintln!("Error starting watcher: {:?}", e);
                 }
             });
