@@ -42,7 +42,7 @@ where
 
         // Watch the config file
         if let Err(e) = watcher.watch(&file_path_clone, RecursiveMode::NonRecursive) {
-            eprintln!("Error watching file: {:?}", e);
+            eprintln!("Error watching file: {e:?}");
             return;
         }
 
@@ -51,10 +51,10 @@ where
             match res {
                 Ok(event) => {
                     if let Err(e) = tx.blocking_send(event) {
-                        eprintln!("Error sending notification: {:?}", e);
+                        eprintln!("Error sending notification: {e:?}");
                     }
                 }
-                Err(e) => eprintln!("Watcher error: {:?}", e),
+                Err(e) => eprintln!("Watcher error: {e:?}"),
             }
         }
     });
@@ -64,7 +64,7 @@ where
         while let Some(event) = rx.recv().await {
             if should_reload(&event, &file_path) {
                 if let Err(e) = handle_file_change(&file_path, &config_data, &reload_tx).await {
-                    eprintln!("Error reloading config: {:?}", e);
+                    eprintln!("Error reloading config: {e:?}");
                 }
             }
         }
@@ -91,24 +91,18 @@ where
 /// Check if a file change should trigger a reload
 #[cfg(feature = "hot-reload")]
 fn should_reload(event: &notify::Event, file_path: &PathBuf) -> bool {
-    // Check if the changed file is our config file
-    if !event.paths.iter().any(|path| path == file_path) {
-        return false;
-    }
-
-    // Check the event type
-    match event.kind {
-        notify::EventKind::Modify(ModifyKind::Data(_)) => true,
-        notify::EventKind::Modify(ModifyKind::Metadata(_)) => true,
-        notify::EventKind::Create(_) => true,
-        _ => false,
-    }
+    matches!(
+        event.kind,
+        notify::EventKind::Modify(ModifyKind::Data(_))
+            | notify::EventKind::Modify(ModifyKind::Metadata(_))
+            | notify::EventKind::Create(_)
+    ) && event.paths.iter().any(|path| path == file_path)
 }
 
 /// Handle a file change
 #[allow(dead_code)]
 async fn handle_file_change<T>(
-    file_path: &PathBuf,
+    file_path: &std::path::Path,
     config_data: &Arc<RwLock<ConfigData<T>>>,
     reload_tx: &broadcast::Sender<T>,
 ) -> ConfigResult<()>
@@ -167,7 +161,7 @@ impl ConfigWatcherManager {
                 if let Err(e) =
                     start_watcher(_file_path, _watcher_id, _config_data, _reload_tx).await
                 {
-                    eprintln!("Error starting watcher: {:?}", e);
+                    eprintln!("Error starting watcher: {e:?}");
                 }
             });
 
@@ -262,7 +256,7 @@ pub mod utils {
         let metadata = tokio::fs::metadata(path).await?;
         metadata
             .modified()
-            .map_err(|e| ConfigError::Io(std::io::Error::new(std::io::ErrorKind::Other, e)))
+            .map_err(|e| ConfigError::Io(std::io::Error::other(e)))
     }
 }
 

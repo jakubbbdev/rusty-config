@@ -41,25 +41,25 @@ pub type ConfigResult<T> = Result<T, ConfigError>;
 
 impl From<serde_json::Error> for ConfigError {
     fn from(err: serde_json::Error) -> Self {
-        ConfigError::Serde(format!("JSON: {}", err))
+        ConfigError::Serde(format!("JSON: {err}"))
     }
 }
 
 impl From<serde_yaml::Error> for ConfigError {
     fn from(err: serde_yaml::Error) -> Self {
-        ConfigError::Serde(format!("YAML: {}", err))
+        ConfigError::Serde(format!("YAML: {err}"))
     }
 }
 
 impl From<toml::de::Error> for ConfigError {
     fn from(err: toml::de::Error) -> Self {
-        ConfigError::Serde(format!("TOML: {}", err))
+        ConfigError::Serde(format!("TOML: {err}"))
     }
 }
 
 impl From<toml::ser::Error> for ConfigError {
     fn from(err: toml::ser::Error) -> Self {
-        ConfigError::Serde(format!("TOML Serialization: {}", err))
+        ConfigError::Serde(format!("TOML Serialization: {err}"))
     }
 }
 

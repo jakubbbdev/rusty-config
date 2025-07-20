@@ -123,8 +123,7 @@ impl TypeValidator {
     pub fn not_empty(value: &str, field_name: &str) -> ConfigResult<()> {
         if value.trim().is_empty() {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must not be empty",
-                field_name
+                "Field '{field_name}' must not be empty"
             )));
         }
         Ok(())
@@ -135,8 +134,7 @@ impl TypeValidator {
         let len = value.len();
         if len < min || len > max {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must be between {} and {} characters long (currently: {})",
-                field_name, min, max, len
+                "Field '{field_name}' must be between {min} and {max} characters long (currently: {len})"
             )));
         }
         Ok(())
@@ -149,8 +147,7 @@ impl TypeValidator {
     {
         if value < min || value > max {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must be between {} and {} (currently: {})",
-                field_name, min, max, value
+                "Field '{field_name}' must be between {min} and {max} (currently: {value})"
             )));
         }
         Ok(())
@@ -160,8 +157,7 @@ impl TypeValidator {
     pub fn url(value: &str, field_name: &str) -> ConfigResult<()> {
         if !value.starts_with("http://") && !value.starts_with("https://") {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must be a valid URL (start with http:// or https://)",
-                field_name
+                "Field '{field_name}' must be a valid URL (start with http:// or https://)"
             )));
         }
         Ok(())
@@ -171,8 +167,7 @@ impl TypeValidator {
     pub fn email(value: &str, field_name: &str) -> ConfigResult<()> {
         if !value.contains('@') || !value.contains('.') {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must be a valid email address",
-                field_name
+                "Field '{field_name}' must be a valid email address"
             )));
         }
         Ok(())
@@ -182,8 +177,7 @@ impl TypeValidator {
     pub fn port(value: u16, field_name: &str) -> ConfigResult<()> {
         if value == 0 {
             return Err(ConfigError::Validation(format!(
-                "Field '{}' must be a valid port between 1 and 65535 (currently: {})",
-                field_name, value
+                "Field '{field_name}' must be a valid port between 1 and 65535 (currently: {value})"
             )));
         }
         Ok(())
@@ -213,8 +207,7 @@ impl CommonValidators {
         let valid_levels = ["trace", "debug", "info", "warn", "error"];
         if !valid_levels.contains(&level.to_lowercase().as_str()) {
             return Err(ConfigError::Validation(format!(
-                "Logging level '{}' is invalid. Valid values: {:?}",
-                level, valid_levels
+                "Logging level '{level}' is invalid. Valid values: {valid_levels:?}"
             )));
         }
         Ok(())
