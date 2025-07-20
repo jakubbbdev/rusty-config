@@ -1,0 +1,17 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 8080,
+    "workers": 4
+  },
+  "database": {
+    "url": "postgresql://localhost/myapp",
+    "pool_size": 10,
+    "timeout": 30
+  },
+  "logging": {
+    "level": "info",
+    "file": "app.log",
+    "max_size": 10485760
+  }
+}
