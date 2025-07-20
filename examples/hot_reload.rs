@@ -55,9 +55,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("📊 Initiale Konfiguration:");
     println!("   Nachricht: {message}", message = initial_config.message);
     println!("   Zähler: {counter}", counter = initial_config.counter);
-    println!("   Aktiviert: {enabled}", enabled = initial_config.settings.enabled);
-    println!("   Intervall: {interval}ms", interval = initial_config.settings.interval);
-    println!("   Timeout: {timeout}ms", timeout = initial_config.settings.timeout);
+    println!(
+        "   Aktiviert: {enabled}",
+        enabled = initial_config.settings.enabled
+    );
+    println!(
+        "   Intervall: {interval}ms",
+        interval = initial_config.settings.interval
+    );
+    println!(
+        "   Timeout: {timeout}ms",
+        timeout = initial_config.settings.timeout
+    );
     println!();
 
     println!("👀 Warte auf Konfigurationsänderungen...");

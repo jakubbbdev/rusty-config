@@ -98,7 +98,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("💾 Config saved to 'config_updated.json'!");
     println!("   New port: {port}", port = updated_config.server.port);
-    println!("   New log level: {level}", level = updated_config.logging.level);
+    println!(
+        "   New log level: {level}",
+        level = updated_config.logging.level
+    );
     println!();
 
     // Show supported formats
