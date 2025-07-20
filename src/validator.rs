@@ -93,10 +93,13 @@ pub trait DetailedValidatable: Validatable {
     async fn validate_detailed(&self) -> ConfigResult<ValidationResult>;
 }
 
+/// Type alias for a validation function
+pub type ValidatorFn<T> = Box<dyn Fn(&T) -> ConfigResult<()> + Send + Sync>;
+
 /// Validation rules
 pub struct ValidationRule<T> {
     pub name: String,
-    pub validator: Box<dyn Fn(&T) -> ConfigResult<()> + Send + Sync>,
+    pub validator: ValidatorFn<T>,
 }
 
 impl<T> ValidationRule<T> {
