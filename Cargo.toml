@@ -1,0 +1,53 @@
+[package]
+name = "rusty-config"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "Eine intelligente Konfigurationsverwaltungsbibliothek mit Hot-Reload, Validierung und mehreren Backend-Formaten"
+license = "MIT"
+repository = "https://github.com/yourusername/rusty-config"
+keywords = ["config", "configuration", "hot-reload", "validation", "yaml", "json", "toml"]
+categories = ["configuration", "development-tools"]
+readme = "README.md"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", optional = true }
+serde_yaml = { version = "0.9", optional = true }
+toml = { version = "0.8", optional = true }
+tokio = { version = "1.0", features = ["full"] }
+notify = { version = "6.1", optional = true }
+thiserror = "1.0"
+anyhow = "1.0"
+async-trait = "0.1"
+futures = "0.3"
+log = { version = "0.4", optional = true }
+env_logger = { version = "0.10", optional = true }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3.8"
+assert_fs = "1.1"
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
+
+[[example]]
+name = "hot_reload"
+path = "examples/hot_reload.rs"
+
+[[example]]
+name = "validation"
+path = "examples/validation.rs"
+
+[features]
+default = ["yaml", "json", "toml"]
+yaml = ["dep:serde_yaml"]
+json = ["dep:serde_json"]
+toml = ["dep:toml"]
+hot-reload = ["dep:notify", "tokio/rt-multi-thread"]
+validation = []
+logging = ["dep:log", "dep:env_logger"] 
