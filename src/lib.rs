@@ -38,11 +38,22 @@
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
 //!     let config = ConfigBuilder::new()
 //!         .file("config.yaml")
-//!         .hot_reload(true)
+//!         .create_if_missing(true)
+//!         .default_content(r#"{
+//!   "server": {
+//!     "host": "localhost",
+//!     "port": 8080
+//!   },
+//!   "database": {
+//!     "url": "postgres://localhost/db",
+//!     "pool_size": 10
+//!   }
+//! }"#.to_string())
 //!         .build::<AppConfig>()
 //!         .await?;
 //!
-//!     println!("Server running on {}:{}", config.server.host, config.server.port);
+//!     let app_config = config.get();
+//!     println!("Server running on {}:{}", app_config.server.host, app_config.server.port);
 //!     Ok(())
 //! }
 //! ```

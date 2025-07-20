@@ -1,4 +1,4 @@
-use rusty_config::{Config, ConfigBuilder};
+use rusty_config::ConfigBuilder;
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
 use tokio::time::sleep;
@@ -23,7 +23,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("==================================\n");
 
     // Erstelle eine Konfiguration mit Hot-Reload
-    let mut config = ConfigBuilder::new()
+    let config = ConfigBuilder::new()
         .file("hot_reload_config.json")
         .hot_reload(true)
         .create_if_missing(true)

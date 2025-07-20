@@ -13,7 +13,6 @@ pub struct Config<T> {
     inner: Arc<RwLock<crate::watcher::ConfigData<T>>>,
     file_path: PathBuf,
     reload_tx: broadcast::Sender<T>,
-    reload_rx: broadcast::Receiver<T>,
     watcher_id: Uuid,
 }
 
@@ -25,7 +24,7 @@ where
     pub async fn from_file<P: Into<PathBuf>>(path: P) -> ConfigResult<Self> {
         let path = path.into();
         let data = crate::loader::load_from_file(&path).await?;
-        let (reload_tx, reload_rx) = broadcast::channel(100);
+        let (reload_tx, _reload_rx) = broadcast::channel(100);
 
         let config = Self {
             inner: Arc::new(RwLock::new(crate::watcher::ConfigData {
@@ -35,7 +34,6 @@ where
             })),
             file_path: path,
             reload_tx,
-            reload_rx,
             watcher_id: Uuid::new_v4(),
         };
 
@@ -138,7 +136,6 @@ where
             inner: Arc::clone(&self.inner),
             file_path: self.file_path.clone(),
             reload_tx: self.reload_tx.clone(),
-            reload_rx: self.reload_tx.subscribe(),
             watcher_id: self.watcher_id,
         }
     }

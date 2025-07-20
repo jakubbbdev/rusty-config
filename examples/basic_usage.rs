@@ -1,4 +1,4 @@
-use rusty_config::{Config, ConfigBuilder};
+use rusty_config::ConfigBuilder;
 use serde::{Deserialize, Serialize};
 use tokio::fs;
 

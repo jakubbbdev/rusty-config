@@ -8,6 +8,9 @@ use std::{
 use tokio::sync::broadcast;
 use uuid::Uuid;
 
+#[cfg(feature = "hot-reload")]
+use notify::event::ModifyKind;
+
 /// Internal config data for the watcher
 pub struct ConfigData<T> {
     pub data: T,
@@ -19,7 +22,7 @@ pub struct ConfigData<T> {
 #[cfg(feature = "hot-reload")]
 pub async fn start_watcher<T>(
     file_path: PathBuf,
-    watcher_id: Uuid,
+    _watcher_id: Uuid,
     config_data: Arc<RwLock<ConfigData<T>>>,
     reload_tx: broadcast::Sender<T>,
 ) -> ConfigResult<()>
@@ -95,14 +98,15 @@ fn should_reload(event: &notify::Event, file_path: &PathBuf) -> bool {
 
     // Check the event type
     match event.kind {
-        notify::EventKind::Modify(notify::ModifyKind::Data(_)) => true,
-        notify::EventKind::Modify(notify::ModifyKind::Metadata(_)) => true,
+        notify::EventKind::Modify(ModifyKind::Data(_)) => true,
+        notify::EventKind::Modify(ModifyKind::Metadata(_)) => true,
         notify::EventKind::Create(_) => true,
         _ => false,
     }
 }
 
 /// Handle a file change
+#[allow(dead_code)]
 async fn handle_file_change<T>(
     file_path: &PathBuf,
     config_data: &Arc<RwLock<ConfigData<T>>>,
@@ -149,10 +153,10 @@ impl ConfigWatcherManager {
     /// Add a new watcher
     pub async fn add_watcher<T>(
         &mut self,
-        file_path: PathBuf,
-        watcher_id: Uuid,
-        config_data: Arc<RwLock<ConfigData<T>>>,
-        reload_tx: broadcast::Sender<T>,
+        _file_path: PathBuf,
+        _watcher_id: Uuid,
+        _config_data: Arc<RwLock<ConfigData<T>>>,
+        _reload_tx: broadcast::Sender<T>,
     ) -> ConfigResult<()>
     where
         T: Clone + DeserializeOwned + Serialize + Send + Sync + 'static,
@@ -160,12 +164,12 @@ impl ConfigWatcherManager {
         #[cfg(feature = "hot-reload")]
         {
             let handle = tokio::spawn(async move {
-                if let Err(e) = start_watcher(file_path, watcher_id, config_data, reload_tx).await {
+                if let Err(e) = start_watcher(_file_path, _watcher_id, _config_data, _reload_tx).await {
                     eprintln!("Error starting watcher: {:?}", e);
                 }
             });
 
-            self.watchers.insert(watcher_id, handle);
+            self.watchers.insert(_watcher_id, handle);
             Ok(())
         }
 
